@@ -28,6 +28,7 @@ class Tweet extends Model
     {
         $this->user_id = $userId;
         $this->content = $createTweet;
+
         return $this->save();
     }
 

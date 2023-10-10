@@ -10,7 +10,7 @@
                     <div class="card-header">Create</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('tweet.createTweet') }}">
+                        <form method="POST" action="{{ route('tweet.createTweet') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 p-3 w-100 d-flex">
@@ -35,6 +35,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 text-right">
                                     <p class="mb-4 text-danger">140文字以内</p>
+                                    <input type="file" name="file">
                                     <button type="submit" class="btn btn-primary">
                                         ツイートする
                                     </button>

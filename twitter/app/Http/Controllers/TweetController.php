@@ -37,6 +37,7 @@ class TweetController extends Controller
      */
     public function createTweet(CreateTweetRequest $request, Tweet $tweet): RedirectResponse
     {
+        dd($request->input());
         $userId = auth()->id();
         $createTweet = $request->tweet;
         $tweet->create($userId, $createTweet);
