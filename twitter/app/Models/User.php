@@ -172,6 +172,7 @@ class User extends Authenticatable
             ['user_id', $userId],
             ['tweet_id', $tweetId],
             ])->exists();
+            
     }
 
     /**
