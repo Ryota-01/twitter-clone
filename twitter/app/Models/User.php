@@ -173,4 +173,14 @@ class User extends Authenticatable
             ['tweet_id', $tweetId],
             ])->exists();
     }
+
+    /**
+     * ツイートテーブルとのリレーション（ユーザー情報の紐付け）
+     *
+     * @return void
+     */
+    public function tweets()
+    {
+      return $this->hasMany(Tweet::class);
+    }
 }

@@ -3,7 +3,7 @@
 @section('title', 'ツイート作成')
 
 @section('content')
-    <div class="container">
+    {{-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -46,5 +46,30 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
+    <div class="container mt-5">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h1>ツイート投稿</h1>
+              <form action={{ route('tweet.createTweet') }} method="post">
+                @csrf
+                  <!-- ツイートテキスト入力フィールド -->
+                  <div class="mb-3">
+                    <label for="tweetText" class="form-label">ツイート内容</label>
+                    <textarea class="form-control" id="tweetText" rows="4" placeholder="ツイート内容を入力してください"></textarea>
+                  </div>
+                  @error('text')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                  <p class="mb-4 text-danger">140文字以内</p>
+                  <!-- ツイートボタン -->
+                  <button type="submit" class="btn btn-primary">ツイートする</button>
+              </form>
+          </div>
+      </div>
+  </div>
+
 @endsection

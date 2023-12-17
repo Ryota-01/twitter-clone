@@ -3,24 +3,21 @@
 @section('title', 'ホーム')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h2>Follower List</h2>
-                @foreach ($followers as $follower)
-                    {{-- ログイン中のユーザーは非表示に --}}
-                    <div class="card">
-                        <div class="card-haeder p-3 w-100 d-flex">
-                            <img src="" class="rounded-circle" width="50" height="50">
-                            <div class="ml-2 d-flex flex-column">
-                                <p class="mb-0">{{ $follower->name }}</p>
-                                <a href="{{ url('users/' . $follower->id) }}"
-                                    class="text-secondary">{{ $follower->screen_name }}</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+  <div class="container mt-5">
+    <h1>フォロワー一覧</h1>
+    <div class="row">
+      @foreach($followers as $follower)
+        <!-- フォローされているユーザーのカード -->
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="user1.jpg" class="card-img-top" alt="ユーザー名">
+            <div class="card-body">
+              <h5 class="card-title">{{ $follower->name }}</h5>
+              <p class="card-text">フォロー中のユーザーのプロフィール情報などがここに表示されます。</p>
             </div>
+          </div>
         </div>
+      @endforeach
     </div>
+  </div>
 @endsection

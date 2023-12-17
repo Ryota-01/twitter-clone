@@ -28,29 +28,33 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
-        Route::get('/{id}', [UserController::class, 'show'])->name('show');
-        Route::put('/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}', [UserController::class, 'delete'])->name('delete');
+      //ユーザー詳細画面
+      Route::get('/{id}', [UserController::class, 'show'])->name('show');
+      //ユーザー情報の更新
+      Route::put('/{id}', [UserController::class, 'update'])->name('update');
+      //ユーザー情報の削除
+      Route::delete('/{id}', [UserController::class, 'delete'])->name('delete');
     });
+
     Route::group(['prefix' => 'users', 'as' => 'users.'], function() {
-        Route::get('/', [UserController::class, 'getAll'])->name('index');
-        Route::get('/follower', [UserController::class, 'getAllFollowers'])->name('getFollowers');
-        Route::get('/followed', [UserController::class, 'getFollowedUsers'])->name('getFollowedUsers');
-        Route::post('/follow/{id}', [UserController::class, 'follow'])->name('follow');
-        Route::delete('/follow/{id}', [UserController::class, 'unfollow'])->name('unfollow');
+      Route::get('/', [UserController::class, 'getAll'])->name('index');
+      Route::get('/follower', [UserController::class, 'getAllFollowers'])->name('getFollowers');
+      Route::get('/followed', [UserController::class, 'getFollowedUsers'])->name('getFollowedUsers');
+      Route::post('/follow/{id}', [UserController::class, 'follow'])->name('follow');
+      Route::delete('/follow/{id}', [UserController::class, 'unfollow'])->name('unfollow');
     });
     Route::group(['prefix' => 'tweets', 'as' => 'tweet.'], function() {
-        Route::post('/', [TweetController::class, 'createTweet'])->name('createTweet');
-        Route::get('/', [TweetController::class, 'getAll'])->name('getAll');
-        Route::get('/create', [TweetController::class, 'create'])->name('create');
-        Route::get('/favorite', [FavoriteController::class, 'getAllByTweetIds'])->name('getFavorite');
-        Route::post('/favorite/{favoriteTweetId}', [FavoriteController::class, 'favoriteTweet'])->name('favorite');
-        Route::get('/{id}', [TweetController::class, 'show'])->name('detail');
-        Route::get('/{id}/edit', [TweetController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [TweetController::class, 'update'])->name('update');
-        Route::delete('/{id}', [TweetController::class, 'delete'])->name('delete');
-        Route::post('/reply/{id}', [ReplyController::class, 'createReply'])->name('reply');
-        Route::delete('/reply/{id}', [ReplyController::class, 'deleteReply'])->name('deletereply');
-        Route::put('/reply/{id}', [ReplyController::class, 'editReply'])->name('editreply');
+      // Route::get('/', [TweetController::class, 'getAll'])->name('getAll');
+      Route::get('/create', [TweetController::class, 'create'])->name('create');
+      Route::post('/create', [TweetController::class, 'createTweet'])->name('createTweet');
+      Route::get('/favorite', [FavoriteController::class, 'getAllByTweetIds'])->name('getFavorite');
+      Route::post('/favorite/{favoriteTweetId}', [FavoriteController::class, 'favoriteTweet'])->name('favorite');
+      Route::get('/{id}', [TweetController::class, 'show'])->name('detail');
+      Route::get('/{id}/edit', [TweetController::class, 'edit'])->name('edit');
+      Route::put('/{id}', [TweetController::class, 'update'])->name('update');
+      Route::delete('/{id}', [TweetController::class, 'delete'])->name('delete');
+      Route::post('/reply/{id}', [ReplyController::class, 'createReply'])->name('reply');
+      Route::delete('/reply/{id}', [ReplyController::class, 'deleteReply'])->name('deletereply');
+      Route::put('/reply/{id}', [ReplyController::class, 'editReply'])->name('editreply');
     });
 });

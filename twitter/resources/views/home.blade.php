@@ -3,29 +3,27 @@
 @section('title', 'ホーム')
 
 @section('content')
-    <div class='container'>
-        <div class='row justify-content-center'>
-            <div class='col-md-8'>
-                <div class='card'>
-                    <div class='card-header'>{{ __('Dashboard') }}</div>
-                    <div class='card-body'>
-                        @if (session('status'))
-                            <div class='alert alert-success' role='alert'>
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        @if (session('success'))
-                            <div>
-                                {{ session('success') }}
-                            </div>
-                        @endif
-                        {{ __('You are logged in!') }}
-                    </div>
-                    <div>
-                        <a href="{{ route('tweet.getAll') }}">ツイート一覧</a>
-                    </div>
-                </div>
+  <div class="container mt-6">
+    <!-- ツイートカードのループ -->
+    @if($userTweets -> count() > 0)
+      @foreach($userTweets as $userTweet)
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+          <!-- ツイートカード -->
+          <!-- 他のツイートカードをここに追加 -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">{{ $userTweet->user->name }}</h5>
+                <p class="card-text" style="background: whitesmoke">{{ $userTweet->content }}</p>
+                <p class="card-text"><small class="text-muted">{{ $userTweet->created_at }}</small></p>
+                <p class="card-text"><small class="text-muted"><a href="{{ route('tweet.detail', ['id' => $userTweet->id ]) }}">詳細</a></small></p>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+        @endforeach
+        @else
+      <div>ツイートが存在しません</div>
+    @endif
+  </div>
 @endsection

@@ -37,12 +37,10 @@ class TweetController extends Controller
      */
     public function createTweet(CreateTweetRequest $request, Tweet $tweet): RedirectResponse
     {
-        dd($request->input());
-        $userId = auth()->id();
-        $createTweet = $request->tweet;
-        $tweet->create($userId, $createTweet);
-
-        return redirect('tweets');
+      $userId = auth()->id();
+      $createTweet = $request->tweet;
+      $tweet->create($userId, $createTweet);
+      return redirect('home');
     }
 
     /**
@@ -54,16 +52,15 @@ class TweetController extends Controller
      */
     public function getAll(Tweet $tweet, CreateQueryRequest $request): View
     {
-        $query = $request->input('searchQuery');
-
-        if($query) {
-            //検索クエリが提供された場合、検索結果を取得
-            $tweets = $this->searchByQuery($query);
-            return view('tweet.index', ['tweets' => $tweets, 'query' => $query]);
-        } else {
-            $tweets = $tweet->getAll();
-            return view('tweet.index', ['tweets' => $tweets]);
-        }
+      $query = $request->input('searchQuery');
+      if($query) {
+        //検索クエリが提供された場合、検索結果を取得
+        $tweets = $this->searchByQuery($query);
+        return view('tweet.index', ['tweets' => $tweets, 'query' => $query]);
+      } else {
+        $tweets = $tweet->getAll();
+        return view('tweet.index', ['tweets' => $tweets]);
+      }
     }
 
     /**
@@ -87,12 +84,12 @@ class TweetController extends Controller
      */
     public function show(int $tweetId, Tweet $tweet, Reply $reply): View
     {
-        $tweetDetail = $tweet->findByTweetId($tweetId);
-        $allReply = $reply->getAllReply($tweetId);
-        return view('tweet.show', [
-            'tweetDetail' => $tweetDetail,
-            'allReply' => $allReply,
-        ]);
+      $tweetDetail = $tweet->findByTweetId($tweetId);
+      $allReply = $reply->getAllReply($tweetId);
+      return view('tweet.show', [
+          'tweetDetail' => $tweetDetail,
+          'allReply' => $allReply,
+      ]);
     }
 
     /**
@@ -118,6 +115,7 @@ class TweetController extends Controller
      */
     public function update(CreateTweetRequest $request, int $tweetId, Tweet $tweet): RedirectResponse
     {
+      dd($request);
         // request->allは推奨しない。
         // 意図しないパラメータが入る可能性があり、インジェクション攻撃を受ける可能性があり）
         $tweet->updateTweet($request->validated());

@@ -26,10 +26,9 @@ class Tweet extends Model
      */
     public function create(int $userId, string $createTweet): bool
     {
-        $this->user_id = $userId;
-        $this->content = $createTweet;
-
-        return $this->save();
+      $this->user_id = $userId;
+      $this->content = $createTweet;
+      return $this->save();
     }
 
     /**
@@ -39,7 +38,7 @@ class Tweet extends Model
      */
     public function getAll(): LengthAwarePaginator
     {
-        return $this->orderBy('created_at', 'desc')->paginate(config('paginate.paginate'));
+      return $this->orderBy('created_at', 'desc')->paginate(config('paginate.paginate'));
     }
 
     /**
@@ -50,7 +49,7 @@ class Tweet extends Model
      */
     public function findByTweetId(int $tweetId): Tweet
     {
-        return $this->find($tweetId);
+      return $this->find($tweetId);
     }
 
     /**
@@ -61,9 +60,9 @@ class Tweet extends Model
      */
     public function updateTweet(array $updateTweet): bool
     {
-        $this->content = $updateTweet;
-        $this->user_id = auth()->id();
-        return $this->update();
+      $this->content = $updateTweet;
+      $this->user_id = auth()->id();
+      return $this->update();
     }
 
     /**
@@ -88,12 +87,16 @@ class Tweet extends Model
      */
     public function searchByQuery(string $query): LengthAwarePaginator
     {
-        $getTweetQuery = $this::query();
-
-        if($query) {
-            return $this->where('content', 'LIKE', "%{$query}%")
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(config('paginate.paginate'));
+      $getTweetQuery = $this::query();
+      if($query) {
+        return $this->where('content', 'LIKE', "%{$query}%")
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(config('paginate.paginate'));
+      }
     }
+
+    public function user()
+    {
+      return $this->belongsTo(User::class);
     }
 }

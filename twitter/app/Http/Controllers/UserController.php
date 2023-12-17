@@ -50,9 +50,7 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request): RedirectResponse
     {
         $user = User::findOrFail(Auth::id());
-        if($request->hasAnyErrors()) {
-            return redirect()->back()->withErrors($request->errors())->withInput();
-        }
+        $validated = $request->validated(); //合格したデータ
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -87,7 +85,7 @@ class UserController extends Controller
      */
     public function getAll(): View
     {
-        return view('user.index', ['users' => User::all()]);
+      return view('user.index', ['users' => User::all()]);
     }
 
     /**
