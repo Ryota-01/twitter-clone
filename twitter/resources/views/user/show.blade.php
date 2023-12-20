@@ -3,14 +3,30 @@
 @section('title', 'ユーザー詳細')
 
 @section('content')
-  <div class="container mt-5" style="width: 80%">
-    <div class="row">
-      <div class="col-md-8">
-        <!-- ユーザー名 -->
-        <h4>現在のユーザー情報</h4>
-        <!-- 詳細情報 -->
-        <p>ユーザーネーム：{{ $userDetail->name }}</p>
-        <p>Email：{{ $userDetail->email }}</p>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 mb-3">
+        <div class="card">
+          <div class="d-inline-flex">
+            <div class="p-3 d-flex flex-column">
+              <img src="" alt="" class="rounded-circle" width="100" height="100">
+              <div class="mt-3 d-flex flex-column">
+                <!-- ユーザー名 -->
+                <h4 class="mb-0 font-weight-bold">{{ $userDetail->name }}</h4>
+                <span class="text-secondary">{{ $userDetail->email }}</span>
+              </div>
+            </div>
+            <div class="p-3 d-flex flex-column justify-content-between">
+              <div class="d-flex">
+                <div>
+                  @if($user->id === Auth::user()->id)
+                    <a href="{{ users.show }}" class="btn btn-primary">プロフィールを編集する</a>
+                  @endif
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
