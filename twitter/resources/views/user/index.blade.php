@@ -44,7 +44,7 @@
                   <form action="{{ route('users.follow', ['id' => $user->id]) }}" 
                     method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-primary">フォロー</button>
+                    <button type="submit" class="btn btn-primary">フォローする</button>
                   </form>
                   @endif
                 </div>
