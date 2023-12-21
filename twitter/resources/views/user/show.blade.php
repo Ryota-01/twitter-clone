@@ -17,10 +17,17 @@
               </div>
             </div>
             <div class="p-3 d-flex flex-column justify-content-between">
-              <div class="d-flex">
-                <div>
+              <div class="d-flex">                  
                   @if($user->id === Auth::user()->id)
                     <a href="{{ users.show }}" class="btn btn-primary">プロフィールを編集する</a>
+                  @else
+                    @if($user)
+                      <form action="" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">フォロー解除</button>
+                      </form>
+                    @endif
                   @endif
                 </div>
               </div>

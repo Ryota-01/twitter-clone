@@ -38,7 +38,10 @@ class UserController extends Controller
     {
         $userDetail = $this->findByUserId($userId, $user);
 
-        return view('user.show', ['userDetail' => $userDetail]);
+        return view('user.show', [
+          'user' => $user,
+          'userDetail' => $userDetail
+        ]);
     }
 
     /**
