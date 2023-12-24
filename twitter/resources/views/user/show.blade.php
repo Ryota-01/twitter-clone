@@ -19,7 +19,7 @@
             <div class="p-3 d-flex flex-column justify-content-between">
               <div class="d-flex">                  
                   @if($user->id === Auth::user()->id)
-                    <a href="{{ users.show }}" class="btn btn-primary">プロフィールを編集する</a>
+                    <a href="{{ users.show }}" class="btn btn-primary">プロフィールを編集</a>
                   @else
                     @if($user)
                       <form action="" method="post">
